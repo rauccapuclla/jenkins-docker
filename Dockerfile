@@ -1,4 +1,7 @@
 FROM jenkins/jenkins:lts
+
+COPY plugins.txt /usr/share/jenkins/plugins.txt
+RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/plugins.tx
  
 USER root
 RUN apt-get update -qq \
@@ -16,5 +19,3 @@ RUN sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/doc
 RUN sudo chmod +x /usr/local/bin/docker-compose
 
 RUN usermod -aG docker jenkins
-
-USER jenkins
